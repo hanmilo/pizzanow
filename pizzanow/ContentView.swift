@@ -10,10 +10,25 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            ZStack {
+                Image("surfBanner")
+                    .resizable()
+                    .scaledToFit()
+                Text("pizzanow")
+                    .background()
+            }
+            Text("order pizza")
+                .font(.title)
+            HStack(alignment:.firstTextBaseline) {
+                Text("your order item")
+                Spacer()
+                Text("$0.00")
+            }
+            HStack(alignment:.top, spacing:15) {
+                Image("0_sm")
+                Text("margherita")
+            }
+            Spacer()
         }
         .padding()
     }
@@ -21,4 +36,6 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+//        .colorScheme(.dark)
+//        .background(Color.black)
 }
