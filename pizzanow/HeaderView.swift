@@ -13,10 +13,12 @@ struct HeaderView: View {
             Image("surfBanner")
                 .resizable()
                 .scaledToFit()
+//                .scaledToFill()
+                .ignoresSafeArea()
             Text("pizzanow")
-//                .background()
                 .font(.custom("Georgia", size: 30, relativeTo: .title))
-                .foregroundColor(Color("color_sky"))
+                .foregroundStyle(.regularMaterial)
+                .fontWeight(.semibold)
         }
     }
 }
