@@ -8,37 +8,48 @@
 import SwiftUI
 
 struct OrderView: View {
-    var orders:[Int]
+    @Binding var orders: [OrderItem]
     var body: some View {
-        ZStack(alignment: .top) {
-            ScrollView {
-                ForEach(orders, id: \.self) { order in
-                    OrderRowView(order: order)
-                        .padding(.bottom, 5)
-                        .padding([.leading, .trailing], 7)
+        VStack {
+            ZStack(alignment: .top) {
+                ScrollView {
+                    ForEach($orders) { order in
+//                        Text(order.item.name)
+                        OrderRowView(order: order)
+                            .padding(.bottom, 5)
+                            .padding([.leading, .trailing], 7)
+                    }
                 }
-            }
-            .padding(.top, 70)
-            HStack {
-                Text("order pizza")
-                    .font(.title)
-                Spacer()
-                Label {
-                    Text(59.99, format: .currency(code: "SGD"))
+                .padding(.top, 70)
+                HStack {
+                    Text("order pizza")
+                        .font(.title)
+                    Spacer()
+                    Label {
+                        Text(59.99, format: .currency(code: "SGD"))
+                    }
+                    icon: {
+                        Image(systemName: orders.isEmpty ? "cart" : "cart.circle.fill")
+                    }
                 }
-                icon: {
-                    Image(systemName: orders.isEmpty ? "cart" : "cart.circle.fill")
-                }
+                .padding()
+                .background(.ultraThinMaterial)
             }
             .padding()
-            .background(.ultraThinMaterial)
+            .cornerRadius(10)
+            Button("Delete Order") {
+                if !orders.isEmpty {
+                    orders.removeLast()
+                }
+            }
+            .padding(5)
+            .background(.regularMaterial, in: Capsule())
+            .padding(7)
         }
-        .padding()
         .background(Color("color_surf"))
-        .cornerRadius(10)
     }
 }
 
 #Preview {
-    OrderView(orders: [1, 2, 3, 4, 6])
+    OrderView(orders: .constant(testOrders))
 }
